@@ -15,10 +15,15 @@ keys:
 folders:
     - map: "~/lmo-homestead-boxes"
       to: "/home/vagrant/lmo-homestead-boxes"
-
+    - map: "~/Sites/lmo.com"
+      to: "/home/vagrant/lmo-com"
 sites:
     - map: homestead.app
       to: "/home/vagrant/lmo-homestead-boxes"
+    - map: lmo.app
+      to: "/home/vagrant/lmo-com/wwwroot"
+    - map: digital.app
+      to: "/home/vagrant/lmo-com/wwwroot_digital"
 
 databases:
     - homestead
@@ -39,3 +44,4 @@ networks:
 #     - send: 7777
 #       to: 777
 #       protocol: udp
+
