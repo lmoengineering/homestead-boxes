@@ -1,0 +1,3 @@
+php*/.vagrant
+php*/vendor
+Homestead.yaml

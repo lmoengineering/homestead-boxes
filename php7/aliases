@@ -1,0 +1,57 @@
+alias ..="cd .."
+alias ...="cd ../.."
+
+alias h='cd ~'
+alias c='clear'
+alias artisan='php artisan'
+
+alias phpspec='vendor/bin/phpspec'
+alias phpunit='vendor/bin/phpunit'
+alias serve=serve-laravel
+
+function serve-laravel() {
+    if [[ "$1" && "$2" ]]
+    then
+        sudo dos2unix /vagrant/scripts/serve-laravel.sh
+        sudo bash /vagrant/scripts/serve-laravel.sh "$1" "$2" 80
+    else
+        echo "Error: missing required parameters."
+        echo "Usage: "
+        echo "  serve domain path"
+    fi
+}
+
+function serve-hhvm() {
+    if [[ "$1" && "$2" ]]
+    then
+        sudo dos2unix /vagrant/scripts/serve-hhvm.sh
+        sudo bash /vagrant/scripts/serve-hhvm.sh "$1" "$2" 80
+    else
+        echo "Error: missing required parameters."
+        echo "Usage: "
+        echo "  serve-hhvm domain path"
+    fi
+}
+
+
+############################################################
+# (custom) shortcuts
+############################################################
+
+# List directory with all files
+alias  l='clear; echo ""; echo -------------- `pwd`; echo ""; ls -lah; echo ""';
+
+# List users on the system
+alias users='cat /etc/passwd | cut -d ":" -f1'
+
+# Show IP address
+alias myip="ifconfig | grep 'inet '"
+
+# Show Current process of user
+alias psg='ps aux | head -n 1; ps aux | grep -v grep | grep -i'
+
+# Show file size of files & directories
+alias fs='clear; echo ""; echo -------------- `pwd`; echo ""; du -hs ./*; echo ""';
+
+# grep history alias
+alias hg='history | grep ';
