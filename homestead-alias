@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# boot up 
+#
+
+LMO_HOMESTEAD="$(exec 2>/dev/null;builtin cd -- $(dirname "$0"); unset PWD; /usr/bin/pwd || /bin/pwd || pwd)"
+
+#echo '----'
+#echo $LMO_HOMESTEAD
+#echo '----'
+alias h56='function __homestead() { (builtin cd $LMO_HOMESTEAD/php5.6 && vagrant $*); unset -f __homestead; }; __homestead'
+alias h5='function __homestead() { (builtin cd $LMO_HOMESTEAD/php5.6 && vagrant $*); unset -f __homestead; }; __homestead'
+alias h7='function __homestead() { (builtin cd $LMO_HOMESTEAD/php7 && vagrant $*); unset -f __homestead; }; __homestead'
