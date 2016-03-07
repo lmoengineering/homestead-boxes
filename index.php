@@ -28,6 +28,20 @@ function getSites($boxes) {
     return $sites;
 }
 
+function getHosts($boxes) {
+    
+    $_boxes = [];
+    foreach ($boxes as $key => $box) {
+        $sites = [];
+        foreach ($box['sites'] as $site) {
+            $sites[] = $site['map'];
+        }
+        $_boxes[] = $box['ip'] . ' ' . implode(' ', $sites);
+    }
+    return implode("\n", $_boxes);
+}
+
+
 $boxes = [
     'php7' => 'php7',
     'php56' => 'php5.6'
@@ -37,6 +51,7 @@ $boxes = getBoxes($boxes);
 
 $sites = getSites($boxes);
 
+$hosts = getHosts($boxes);
 
 ?>
 <!DOCTYPE html>
@@ -53,6 +68,10 @@ $sites = getSites($boxes);
            <li><a href="<?=$site?>"><?=$site?></a></li>
         <?php endforeach; ?>
     </ul>
+
+    <h2>Host File</h2>
+
+    <pre><code><?=$hosts?></code></pre>
 
 </body>
 </html>

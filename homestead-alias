@@ -1,6 +1,8 @@
 #!/bin/bash
 #
-# boot up 
+# install
+# 
+#  source $HOME/lmo-homestead-boxes/homestead-alias
 #
 
 LMO_HOMESTEAD="$(exec 2>/dev/null;builtin cd -- $(dirname "$0"); unset PWD; /usr/bin/pwd || /bin/pwd || pwd)"
