@@ -30,15 +30,16 @@ function getSites($boxes) {
 
 function getHosts($boxes) {
     
-    $_boxes = [];
+    $hosts = [];
+    $hosts[] = '# LMO HOMESTEAD BOXES';
     foreach ($boxes as $key => $box) {
         $sites = [];
         foreach ($box['sites'] as $site) {
             $sites[] = $site['map'];
         }
-        $_boxes[] = $box['ip'] . ' ' . implode(' ', $sites);
+        $hosts[] = $box['ip'] . ' ' . implode(' ', $sites);
     }
-    return implode("\n", $_boxes);
+    return implode("\n", $hosts);
 }
 
 
