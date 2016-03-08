@@ -25,19 +25,15 @@ fi
 
 
 ## show versions
-echo 'Homestead Box' \
-&& echo "\n" \
-&& php -v | sed -n 1p \
-&& mysql --version \
-&& psql --version \
-&& nginx -v  2>&1 | grep version \
-&& redis-cli info server | grep redis_version \
-&& ruby -v \
-&& echo 'node' `node -v` \
-&& echo 'npm' `npm -v` \
-&& mailcatcher --version > homestead.box.txt
-
-echo ''
-echo 'BOX INFO'
-cat homestead.box.txt
+echo ""
+echo 'BOX INFO' 
+php -v | sed -n 1p 
+mysql --version 
+psql --version 
+nginx -v  2>&1 | grep version 
+redis-cli info server | grep redis_version 
+ruby -v 
+echo 'node' `node -v` 
+echo 'npm' `npm -v` 
+mailcatcher --version 
 echo '----------'
