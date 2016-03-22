@@ -25,15 +25,9 @@ fi
 
 
 ## show versions
+## show versions
 echo ""
-echo 'BOX INFO' 
-php -v | sed -n 1p 
-mysql --version 
-psql --version 
-nginx -v  2>&1 | grep version 
-redis-cli info server | grep redis_version 
-ruby -v 
-echo 'node' `node -v` 
-echo 'npm' `npm -v` 
-mailcatcher --version 
+box-info
+echo '----------'
+int-ips
 echo '----------'

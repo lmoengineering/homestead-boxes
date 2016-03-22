@@ -5,6 +5,7 @@ cpus: 1
 hostname: lmo-homestead-boxes-php7
 name: lmo-homestead-boxes-php7
 provider: virtualbox
+version: 0.4.2
 
 authorize: ~/.ssh/id_rsa.pub
 
@@ -12,15 +13,18 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
+      # Default
     - map: "~/lmo-homestead-boxes"
       to: "/home/vagrant/lmo-homestead-boxes"
 
 sites:
+      # Default
     - map: homestead.app
       to: "/home/vagrant/lmo-homestead-boxes"
 
 databases:
     - homestead
+
 
 networks:
     - type: public_network

@@ -10,6 +10,7 @@ afterScriptPath = "after.sh"
 aliasesPath = "aliases"
 
 require File.expand_path(confDir + '/scripts/homestead.rb')
+require File.expand_path('./custom.rb')
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     if File.exists? aliasesPath then
@@ -25,4 +26,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     if File.exists? afterScriptPath then
         config.vm.provision "shell", path: afterScriptPath
     end
+
+    if File.exists? homesteadYamlPath then
+      Custom.configure(config, YAML::load(File.read(homesteadYamlPath)))
+    end
+
 end

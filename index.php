@@ -18,10 +18,11 @@ function getBoxes($boxes) {
 }
 
 function getSites($boxes) {
+    
     $sites = [];
     foreach ($boxes as $key => $box) {
         foreach ($box['sites'] as $site) {
-            $sites[] = 'http://'.$site['map'];
+            $sites[$key] = 'http://'.$site['map'];
         }
         
     }
@@ -53,6 +54,8 @@ $boxes = getBoxes($boxes);
 $sites = getSites($boxes);
 
 $hosts = getHosts($boxes);
+
+
 
 ?>
 <!DOCTYPE html>

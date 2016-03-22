@@ -1,11 +1,16 @@
 # homestead-boxes
-multiple homestead boxes
+
+Run multiple homestead boxes globally for all files
 
 
 ## Install
 
 
-__note PHP 5.5.9 required!!!__
+__Requirements__
+
+- PHP >= 5.5.9
+- composer
+- ssh public key added to vim.beanstalkapp.com and github.com account
 
 ### 1. Clone Repo
 clone repo using git into local folder (example ~/lmo-homestead-boxes)
@@ -15,7 +20,8 @@ clone repo using git into local folder (example ~/lmo-homestead-boxes)
 ### 2. Install Dependencies
 
 Using composer install all needed dependencies
-
+    
+    cd ~/lmo-homestead-boxes
     composer install
 
 ### 3. Add Aliases
@@ -26,10 +32,21 @@ Copy the code below into __.profile__ or __.bashrc__ or __.zshrc__
 
 ### 4. Setup each box 
 
-copy homestead.yaml.sample to homstead.yaml 
-run composer install
+within each folder copy Homestead.yaml.sample to Homstead.yaml and update settings
 
-### 6. Import and Boot up
+    cd ~/lmo-homestead-boxes/php7
+    cp Homestead.yaml.sample Homstead.yaml
+    composer install
+
+change any settings as needed in the yaml file
+
+    cd ~/lmo-homestead-boxes/php5.6
+    cp Homestead.yaml.sample Homstead.yaml
+    composer install
+
+change any settings as needed in the yaml file
+
+### 5. Import and Boot up
 
 Create the base machines and provision both of them using the new aliases
 
