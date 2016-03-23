@@ -13,20 +13,37 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: "~/lmo-homestead-boxes"
-      to: "/home/vagrant/lmo-homestead-boxes"
+      # LMO 
     - map: "~/Sites/lmo.com"
       to: "/home/vagrant/lmo-com"
-sites:
-    - map: homestead.app
+      database: lmo-com
+      # CDC
+    - map: "~/Sites/cdc"
+      to: "/home/vagrant/cdc"
+      database: cdc
+      # Default
+    - map: "~/lmo-homestead-boxes"
       to: "/home/vagrant/lmo-homestead-boxes"
+
+sites:
+      # LMO
     - map: lmo.app
       to: "/home/vagrant/lmo-com/wwwroot"
-    - map: digital.app
-      to: "/home/vagrant/lmo-com/wwwroot_digital"
+    - map: lmo.local
+      to: "/home/vagrant/lmo-com/wwwroot"
+      # CDC
+    - map: cdc.app
+      to: "/home/vagrant/cdc"
+    - map: www.cdc.app
+      to: "/home/vagrant/cdc"
+      # Default
+    - map: homestead.app
+      to: "/home/vagrant/lmo-homestead-boxes"
 
 databases:
     - homestead
+    - lmo-com
+    - cdc
 
 networks:
     - type: public_network
