@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # If you would like to do some extra provisioning you may
 # add any commands you wish to this file and they will
@@ -13,14 +13,17 @@ else
     echo '----------'
 
     # update
-    sudo apt-get update
+    apt-get update
 
     # for db imports
-    sudo apt-get install unzip
+    apt-get install unzip
 
-    # install Ruby and mailcatcher
-    sudo apt-get -y install ruby ruby-dev
-    sudo gem install mailcatcher
+    ## intall rvm / ruby
+    bash lmo-homestead-boxes/scripts/rvm.sh
+    source /usr/local/rvm/scripts/rvm
+
+    # install mailcatcher
+    gem install mailcatcher
 
     echo 'description "Mailcatcher"
 
@@ -37,10 +40,16 @@ exec /usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0' > /etc/in
 fi
 
 
-## show versions
-## show versions
+## show versions & IPs
 echo ""
-box-info
-echo '----------'
-int-ips
-echo '----------'
+    echo 'BOX INFO' 
+    php -v | sed -n 1p 
+    mysql --version 
+    psql --version 
+    nginx -v  2>&1 | grep version 
+    redis-cli info server | grep redis_version 
+    ruby -v     
+    echo 'node' `node -v` 
+    echo 'npm' `npm -v` 
+    mailcatcher --version 
+    echo '----------';

@@ -1,14 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 # If you would like to do some extra provisioning you may
 # add any commands you wish to this file and they will
 # be run after the Homestead machine is provisioned.
 
-#!/bin/sh
-
-# If you would like to do some extra provisioning you may
-# add any commands you wish to this file and they will
-# be run after the Homestead machine is provisioned.
 set -e
 
 if [ -e /.installed ]; then
@@ -20,14 +15,17 @@ else
     echo '----------'
 
     # update
-    sudo apt-get update
+    apt-get update
 
     # for db imports
-    sudo apt-get install unzip
+    apt-get install unzip
+
+    ## intall rvm / ruby
+    bash lmo-homestead-boxes/scripts/rvm.sh
+    source /usr/local/rvm/scripts/rvm
 
     # install Ruby and mailcatcher
-    sudo apt-get -y install ruby ruby-dev
-    sudo gem install mailcatcher
+    gem install mailcatcher
 
     echo 'description "Mailcatcher"
 
