@@ -13,6 +13,8 @@ else
     echo '----------'
 
     # update
+    #rm /var/lib/apt/lists/* -vf
+    apt-get clean
     apt-get update
 
     # for db imports

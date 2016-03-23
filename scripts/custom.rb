@@ -32,8 +32,8 @@ class Custom
                     if File.exists? dump then
                         dbfile = '/.database/db-latest.sql';
                     end
-
-                    if defined? dbfile then
+                    
+                    unless dbfile.nil? || dbfile == 0
                         dump = File.expand_path(folder["to"] + dbfile)
                         config.vm.provision "shell" do |s|
                             s.path = "../scripts/import-db.sh"
