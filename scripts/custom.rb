@@ -23,12 +23,24 @@ class Custom
             settings["folders"].each do |folder|
                 if folder.include? 'database'
 
+                    dump = File.expand_path(folder["map"] + '/.database/db-latest.sql.zip')
+                    if File.exists? dump then
+                        dbfile = '/.database/db-latest.sql.zip';
+                    end
+
                     dump = File.expand_path(folder["map"] + '/.database/db-latest.sql')
                     if File.exists? dump then
-                        dump = File.expand_path(folder["to"] + '/.database/db-latest.sql')
-                        config.vm.provision "shell", inline: "echo import database: " + folder['database']
-                        config.vm.provision "shell", inline: "mysql -u homestead -psecret " + folder['database'] + " < " + dump
+                        dbfile = '/.database/db-latest.sql';
                     end
+
+                    if defined? dbfile then
+                        dump = File.expand_path(folder["to"] + dbfile)
+                        config.vm.provision "shell" do |s|
+                            s.path = "../scripts/import-db.sh"
+                            s.args = [folder["database"], dump, dbfile]
+                        end
+                    end
+
                 end
             end
         end

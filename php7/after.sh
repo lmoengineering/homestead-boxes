@@ -15,6 +15,9 @@ else
     # update
     sudo apt-get update
 
+    # for db imports
+    sudo apt-get install unzip
+
     # install Ruby and mailcatcher
     sudo apt-get -y install ruby ruby-dev
     sudo gem install mailcatcher
