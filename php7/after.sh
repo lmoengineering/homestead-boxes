@@ -19,6 +19,16 @@ else
     sudo apt-get -y install ruby ruby-dev
     sudo gem install mailcatcher
 
+    echo 'description "Mailcatcher"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+
+exec /usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0' > /etc/init/mailcatcher.conf
+    service mailcatcher start
+
     touch /.installed
 
 fi

@@ -10,9 +10,12 @@ afterScriptPath = "after.sh"
 aliasesPath = "aliases"
 
 require File.expand_path(confDir + '/scripts/homestead.rb')
-require File.expand_path('./custom.rb')
+require File.expand_path('../scripts/custom.rb')
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    
+    #config.vm.box_check_update = false
+
     if File.exists? aliasesPath then
         config.vm.provision "file", source: aliasesPath, destination: "~/.bash_aliases"
     end
