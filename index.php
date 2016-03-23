@@ -8,6 +8,15 @@ function parseYaml($folder) {
     return Yaml::parse(file_get_contents("{$folder}/Homestead.yaml"));
 }
 
+function lanIP(){
+    $file = '../.ip';
+    if (file_exists($file)) {
+        $d = file_get_contents($file);
+        return trim(str_replace('eth2: ', '', $d));
+    }
+    return false;
+}
+
 function getBoxes($boxes) {
     foreach ($boxes as $key => $folder) {
         $data = parseYaml($folder);
@@ -18,11 +27,16 @@ function getBoxes($boxes) {
 }
 
 function getSites($boxes) {
-    
+
     $sites = [];
     foreach ($boxes as $key => $box) {
         foreach ($box['sites'] as $site) {
-            $sites[$key] = 'http://'.$site['map'];
+            $sites[$key][$site['map']]['base'] = 'http://'.$site['map'];
+            $sites[$key][$site['map']]['xip.io'] = false;
+            if (lanIP()) {
+                //$sites[$key][$site['map']]['xip.io'] = 'http://'.$site['map'].'.'.lanIP().'.xip.io';
+            }
+            
         }
         
     }
@@ -45,8 +59,8 @@ function getHosts($boxes) {
 
 
 $boxes = [
-    'php7' => 'php7',
-    'php56' => 'php5.6'
+    'php7 box' => 'php7',
+    'php5.6 box' => 'php5.6'
 ];
 
 $boxes = getBoxes($boxes);
@@ -54,8 +68,6 @@ $boxes = getBoxes($boxes);
 $sites = getSites($boxes);
 
 $hosts = getHosts($boxes);
-
-
 
 ?>
 <!DOCTYPE html>
@@ -66,10 +78,21 @@ $hosts = getHosts($boxes);
 <body>
 
     <h1>Local Sites</h1>
+
+    <h2>Site Links</h2>
     
     <ul>
-        <?php foreach ($sites as $site): ?>
-           <li><a href="<?=$site?>"><?=$site?></a></li>
+        <?php foreach ($boxes as $box => $f): ?>
+            <li style="font-weight: bold"><?=$box?></li>
+            <ul>
+            <?php foreach ($sites[$box] as $name => $site): ?>
+                <li><a href="<?=$site['base']?>"><?=$name?></a>
+                    <?if($site['xip.io']):?>
+                    <a href="<?=$site['xip.io']?>"><?=$site['xip.io']?></a>
+                    <?endif;?>
+                </li>
+            <?php endforeach; ?>
+            </ul>
         <?php endforeach; ?>
     </ul>
 
