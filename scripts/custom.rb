@@ -5,7 +5,6 @@ class Custom
 
         # Configure Local Variable To Access Scripts From Remote Location
         scriptDir = File.dirname(__FILE__)
-        puts scriptDir
 
         # Check each project for after.sh script
         if settings.include? 'folders'

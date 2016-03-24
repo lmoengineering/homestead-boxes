@@ -32,14 +32,16 @@ function getSites($boxes) {
     $sites = [];
     foreach ($boxes as $key => $box) {
         foreach ($box['sites'] as $site) {
-            $v = $box['folder'];            
+            $v = $box['folder'];
             $sites[$key][$site['map']]['base'] = 'http://'.$site['map'];
             $sites[$key][$site['map']]['xip.io'] = false;
             if (lanIP($v)) {
                 $sites[$key][$site['map']]['xip.io'] = 'http://'.$site['map'].'.'.lanIP($v).'.xip.io';
             }
-            
         }
+        // add mailcatcher
+        $sites[$key]['mailcatcher']['base'] = "http://{$box['ip']}:1080";
+        $sites[$key]['mailcatcher']['xip.io'] = "http://{$box['ip']}:1080";
         
     }
     return $sites;
@@ -101,8 +103,8 @@ $hosts = getHosts($boxes);
                 <?php foreach ($sites[$box] as $name => $site): ?>
                     <tr>
                         <td><?=$name?></td>
-                        <td><a href="<?=$site['base']?>"><?=$site['base']?></a></td>
-                        <td><?if($site['xip.io']):?><a href="<?=$site['xip.io']?>"><?=$site['xip.io']?></a><?endif;?></td>
+                        <td><a target="_blank" href="<?=$site['base']?>"><?=$site['base']?></a></td>
+                        <td><?if($site['xip.io']):?><a target="_blank" href="<?=$site['xip.io']?>"><?=$site['xip.io']?></a><?endif;?></td>
                     </tr>
                 <?php endforeach; ?>
                 </table>

@@ -13,18 +13,17 @@ else
     echo '----------'
 
     # update
-    #rm /var/lib/apt/lists/* -vf
     apt-get clean
+    apt-add-repository --yes ppa:brightbox/ruby-ng
     apt-get update
 
     # for db imports
     apt-get install unzip
 
-    ## intall rvm / ruby
-    bash lmo-homestead-boxes/scripts/rvm.sh
-    source /usr/local/rvm/scripts/rvm
+    ## intall ruby2.3
+    apt-get install --yes ruby2.3 ruby2.3-dev
 
-    # install mailcatcher
+    # install Ruby and mailcatcher
     gem install mailcatcher
 
     echo 'description "Mailcatcher"
