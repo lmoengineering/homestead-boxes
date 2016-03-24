@@ -8,8 +8,9 @@ function parseYaml($folder) {
     return Yaml::parse(file_get_contents("{$folder}/Homestead.yaml"));
 }
 
-function lanIP(){
-    $file = '../.ip';
+function lanIP($v){
+    $file = "./.{$v}-ip";
+
     if (file_exists($file)) {
         $d = file_get_contents($file);
         return trim(str_replace('eth2: ', '', $d));
@@ -31,10 +32,11 @@ function getSites($boxes) {
     $sites = [];
     foreach ($boxes as $key => $box) {
         foreach ($box['sites'] as $site) {
+            $v = $box['folder'];            
             $sites[$key][$site['map']]['base'] = 'http://'.$site['map'];
             $sites[$key][$site['map']]['xip.io'] = false;
-            if (lanIP()) {
-                //$sites[$key][$site['map']]['xip.io'] = 'http://'.$site['map'].'.'.lanIP().'.xip.io';
+            if (lanIP($v)) {
+                $sites[$key][$site['map']]['xip.io'] = 'http://'.$site['map'].'.'.lanIP($v).'.xip.io';
             }
             
         }
@@ -74,31 +76,45 @@ $hosts = getHosts($boxes);
 <html>
 <head>
     <title>Homestead Boxes</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
-
-    <h1>Local Sites</h1>
-
-    <h2>Site Links</h2>
     
-    <ul>
-        <?php foreach ($boxes as $box => $f): ?>
-            <li style="font-weight: bold"><?=$box?></li>
-            <ul>
-            <?php foreach ($sites[$box] as $name => $site): ?>
-                <li><a href="<?=$site['base']?>"><?=$name?></a>
-                    <?if($site['xip.io']):?>
-                    <a href="<?=$site['xip.io']?>"><?=$site['xip.io']?></a>
-                    <?endif;?>
-                </li>
+    <div class="container">
+        <h1>Local Sites</h1>
+
+        <p>some quick vagrant notes:</p>
+        <dl>
+            <dt>h7 provision </dt><dd>This will add new sites and process any intial scripts</dd>
+            <dt>h7 up</dt><dd>boot up machine and attach folder mounts</dd>
+        </dl>
+        
+        <h2>Site Links</h2>
+        
+        
+            <?php foreach ($boxes as $box => $f): ?>
+                <table class="table table-striped">
+                <thead>
+                    <tr><th colspan="3"><?=$box?></th></tr>
+                </thead>
+                <?php foreach ($sites[$box] as $name => $site): ?>
+                    <tr>
+                        <td><?=$name?></td>
+                        <td><a href="<?=$site['base']?>"><?=$site['base']?></a></td>
+                        <td><?if($site['xip.io']):?><a href="<?=$site['xip.io']?>"><?=$site['xip.io']?></a><?endif;?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </table>
             <?php endforeach; ?>
-            </ul>
-        <?php endforeach; ?>
-    </ul>
+        
 
-    <h2>Host File</h2>
+        <h2>Host File</h2>
 
-    <pre><code><?=$hosts?></code></pre>
+        <p>Please remember update your hosts file if new sites have been added using the printout below.</p>
+
+        <pre><code><?=$hosts?></code></pre>
+    </div>
 
 </body>
 </html>

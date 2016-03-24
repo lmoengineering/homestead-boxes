@@ -1,3 +1,5 @@
 php*/.vagrant
 vendor
 Homestead.yaml
+.php5.6-ip
+.php7-ip
