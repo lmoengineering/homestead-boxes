@@ -1,0 +1,75 @@
+alias ..="cd .."
+alias ...="cd ../.."
+
+alias h='cd ~'
+alias c='clear'
+alias artisan='php artisan'
+
+alias phpspec='vendor/bin/phpspec'
+alias phpunit='vendor/bin/phpunit'
+alias serve=serve-laravel
+
+alias install-drupal='function __func() { (builtin cd $LMO_HOMESTEAD/scripts && install-drupal-7.sh $*); unset -f __func; }; __func'
+
+function serve-laravel() {
+    if [[ "$1" && "$2" ]]
+    then
+        sudo dos2unix /vagrant/scripts/serve-laravel.sh
+        sudo bash /vagrant/scripts/serve-laravel.sh "$1" "$2" 80
+    else
+        echo "Error: missing required parameters."
+        echo "Usage: "
+        echo "  serve domain path"
+    fi
+}
+
+function serve-hhvm() {
+    if [[ "$1" && "$2" ]]
+    then
+        sudo dos2unix /vagrant/scripts/serve-hhvm.sh
+        sudo bash /vagrant/scripts/serve-hhvm.sh "$1" "$2" 80
+    else
+        echo "Error: missing required parameters."
+        echo "Usage: "
+        echo "  serve-hhvm domain path"
+    fi
+}
+
+function box-info {
+    echo 'BOX INFO' 
+    php -v | sed -n 1p 
+    mysql --version 
+    psql --version 
+    nginx -v  2>&1 | grep version 
+    redis-cli info server | grep redis_version 
+    ruby -v 
+    echo 'node' `node -v` 
+    echo 'npm' `npm -v` 
+    mailcatcher --version 
+    echo '----------';
+}
+
+function int-ips { /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ": " $3 }'; echo '----------'; }
+
+
+############################################################
+# (custom) shortcuts
+############################################################
+
+# List directory with all files
+alias  l='clear; echo ""; echo -------------- `pwd`; echo ""; ls -lah; echo ""';
+
+# List users on the system
+alias users='cat /etc/passwd | cut -d ":" -f1'
+
+# Show IP address
+alias myip="ifconfig | grep 'inet '"
+
+# Show Current process of user
+alias psg='ps aux | head -n 1; ps aux | grep -v grep | grep -i'
+
+# Show file size of files & directories
+alias fs='clear; echo ""; echo -------------- `pwd`; echo ""; du -hs ./*; echo ""';
+
+# grep history alias
+alias hg='history | grep ';

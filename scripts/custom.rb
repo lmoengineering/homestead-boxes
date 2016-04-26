@@ -12,7 +12,7 @@ class Custom
                 afterScriptPath = File.expand_path(folder["map"] + '/after.sh')
                 if File.exists? afterScriptPath then
                     config.vm.provision "shell", inline: "echo afterScriptPath"
-                    config.vm.provision "shell", path: afterScriptPath
+                    config.vm.provision "shell", path: afterScriptPath, args:[folder["to"]]
                 end
             end
         end

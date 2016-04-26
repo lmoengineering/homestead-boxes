@@ -50,7 +50,7 @@ function getSites($boxes) {
 function getHosts($boxes) {
     
     $hosts = [];
-    $hosts[] = '# LMO HOMESTEAD BOXES';
+    $hosts[] = "##\n## LMO HOMESTEAD BOXES\n##";
     foreach ($boxes as $key => $box) {
         $sites = [];
         foreach ($box['sites'] as $site) {
@@ -58,6 +58,7 @@ function getHosts($boxes) {
         }
         $hosts[] = $box['ip'] . ' ' . implode(' ', $sites);
     }
+    $hosts[] = "######";
     return implode("\n", $hosts);
 }
 

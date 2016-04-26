@@ -3,10 +3,12 @@
 DB=$1
 DUMP=$2
 
+LOCK=$LOGS_DIR/.imported-$DB
+
+echo $LOCK
+
 USER=homestead
 PW=secret
-
-LOCK=.imported-$DB
 
 if [ -e $LOCK ]; then
     echo 'Already imported: ' $DB ' from ' $DUMP;

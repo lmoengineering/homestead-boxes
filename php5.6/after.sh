@@ -4,9 +4,15 @@
 # add any commands you wish to this file and they will
 # be run after the Homestead machine is provisioned.
 
+echo "export LOGS_DIR='/home/vagrant/lmo-homestead-boxes/logs/php56'" /etc/profile.d/homestead.sh
+
+mkdir -p $LOGS_DIR
+
+LOCK=$LOGS_DIR/.installed
+
 set -e
 
-if [ -e /.installed ]; then
+if [ -e $LOCK ]; then
     echo 'Already installed.'
 
 else
@@ -42,8 +48,13 @@ exec /usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0' > /etc/in
     printf '%s\n%s\n%s\n' '[mysqld]' '# Fix EE issues with group by' 'sql_mode = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' > /etc/mysql/conf.d/sql_mode.cnf
     service mysql restart 
 
+    ## Install phpMyAdmin
+    composer -g config repositories.phpmyadmin composer https://www.phpmyadmin.net/packages.json
+    composer create-project phpmyadmin/phpmyadmin --no-dev
+    cp /home/vagrant/lmo-homestead-boxes/config.ini.php /home/vagrant/phpmyadmin/config.ini.php
+    ln -s /home/vagrant/phpmyadmin/ /home/vagrant/lmo-homestead-boxes/phpmyadmin
 
-    touch /.installed
+    touch $LOCK
 
 fi
 

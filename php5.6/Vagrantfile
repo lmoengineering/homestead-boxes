@@ -4,10 +4,11 @@ require 'yaml'
 VAGRANTFILE_API_VERSION ||= "2"
 confDir = $confDir ||= File.expand_path("vendor/laravel/homestead", File.dirname(__FILE__))
 
+box = "php56"
 homesteadYamlPath = "Homestead.yaml"
 homesteadJsonPath = "Homestead.json"
 afterScriptPath = "after.sh"
-aliasesPath = "aliases"
+aliasesPath = "../scripts/aliases"
 
 require File.expand_path(confDir + '/scripts/homestead.rb')
 require File.expand_path('../scripts/custom.rb')
