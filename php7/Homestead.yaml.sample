@@ -1,11 +1,12 @@
 ---
+####   PHP 7 BOX
 ip: "192.168.10.10"
 memory: 2048
 cpus: 1
-hostname: lmo-homestead-boxes-php7
+hostname: php7
 name: lmo-homestead-boxes-php7
 provider: virtualbox
-version: 0.4.2
+version: ">= 0.4.2"
 
 authorize: ~/.ssh/id_rsa.pub
 
@@ -19,7 +20,7 @@ folders:
 
 sites:
       # Default
-    - map: homestead.app
+    - map: homestead7.app
       to: "/home/vagrant/lmo-homestead-boxes"
 
 databases:
