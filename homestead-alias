@@ -20,7 +20,7 @@ function h_update() {
 
 function __homestead_func() {
 
-    __update_homestead
+    
 
     if [[ $2 == "edit" ]]; then
         subl $LMO_HOMESTEAD/$1/Homestead.yaml;
@@ -50,7 +50,7 @@ function __update_homestead() {
     else
       printf "${RED}%s${NORMAL}\n" 'There was an error updating. Try again later?'
     fi
-    echo 'haha'
+    
 }
 
 function __homestead_vagrant() {
