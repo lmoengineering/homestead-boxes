@@ -21,6 +21,8 @@ function h_update() {
 function __homestead_func() {
     if [[ $2 == "edit" ]]; then
         subl $LMO_HOMESTEAD/$1/Homestead.yaml;
+    elif [[ $2 == "reboot" ]]; then
+        (builtin cd $LMO_HOMESTEAD/$1 && vagrant reload --provision);
     else
         (builtin cd $LMO_HOMESTEAD/$1 && vagrant ${@:2});
     fi
