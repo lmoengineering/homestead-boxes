@@ -19,6 +19,9 @@ function h_update() {
 }
 
 function __homestead_func() {
+
+    __update_homestead
+
     if [[ $2 == "edit" ]]; then
         subl $LMO_HOMESTEAD/$1/Homestead.yaml;
     elif [[ $2 == "reboot" ]]; then
@@ -26,6 +29,28 @@ function __homestead_func() {
     else
         (builtin cd $LMO_HOMESTEAD/$1 && vagrant ${@:2});
     fi
+}
+
+function __update_homestead() {
+
+    builtin cd $LMO_HOMESTEAD
+
+    if git pull --rebase --stat origin master
+    then
+    #   printf '%s' "$GREEN"
+    #   printf '%s\n' '    __             '
+    #   printf '%s\n' '   / /_     ______ '
+    #   printf '%s\n' '  / __ \   / __  / '
+    #   printf '%s\n' ' / / / /  / /_/ /  '
+    #   printf '%s\n' '/_/ /_/  /_ _ _/   '
+    #   printf '%s\n' '                   '
+      printf "${BLUE}%s\n" "Hooray! lmo-homestead-boxes have been updated and/or is at the current version."
+    #   printf "${BLUE}${BOLD}%s${NORMAL}\n" "To keep up on the latest news and updates, follow us on twitter: https://twitter.com/ohmyzsh"
+    #   printf "${BLUE}${BOLD}%s${NORMAL}\n" "Get your Oh My Zsh swag at:  http://shop.planetargon.com/"
+    else
+      printf "${RED}%s${NORMAL}\n" 'There was an error updating. Try again later?'
+    fi
+    echo 'haha'
 }
 
 function __homestead_vagrant() {
