@@ -42,6 +42,10 @@ function getSites($boxes) {
         // add mailcatcher
         $sites[$key]['mailcatcher']['base'] = "http://{$box['ip']}:1080";
         $sites[$key]['mailcatcher']['xip.io'] = "http://{$box['ip']}:1080";
+
+        // add phpmyadmin
+        $sites[$key]['phpmyadmin']['base'] = "http://{$box['domain']}/phpmyadmin/";
+        $sites[$key]['phpmyadmin']['xip.io'] = "http://{$box['domain']}/phpmyadmin/";
         
     }
     return $sites;
