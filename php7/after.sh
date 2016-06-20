@@ -36,6 +36,12 @@ respawn
 exec /usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0' > /etc/init/mailcatcher.conf
     service mailcatcher start
 
+    ## Install phpMyAdmin
+    composer -g config repositories.phpmyadmin composer https://www.phpmyadmin.net/packages.json
+    composer create-project phpmyadmin/phpmyadmin --no-dev
+    cp /home/vagrant/lmo-homestead-boxes/config.ini.php /home/vagrant/phpmyadmin/config.ini.php
+    ln -s /home/vagrant/phpmyadmin/ /home/vagrant/lmo-homestead-boxes/phpmyadmin
+
     touch /.installed
 
 fi

@@ -3,10 +3,9 @@
 require_once 'vendor/autoload.php';
 
 use Symfony\Component\Yaml\Yaml;
+use HostsManager\homesteadYamlParser;
 
-function parseYaml($folder) {
-    return Yaml::parse(file_get_contents("{$folder}/Homestead.yaml"));
-}
+
 
 function lanIP($v){
     $file = "./.{$v}-ip";
@@ -18,65 +17,18 @@ function lanIP($v){
     return false;
 }
 
-function getBoxes($boxes) {
-    foreach ($boxes as $key => $folder) {
-        $data = parseYaml($folder);
-        $data['folder'] = $folder;
-        $boxes[$key] = $data;
-    }
-    return $boxes;
-}
-
-function getSites($boxes) {
-
-    $sites = [];
-    foreach ($boxes as $key => $box) {
-        foreach ($box['sites'] as $site) {
-            $v = $box['folder'];
-            $sites[$key][$site['map']]['base'] = 'http://'.$site['map'];
-            $sites[$key][$site['map']]['xip.io'] = false;
-            if (lanIP($v)) {
-                $sites[$key][$site['map']]['xip.io'] = 'http://'.$site['map'].'.'.lanIP($v).'.xip.io';
-            }
-        }
-        // add mailcatcher
-        $sites[$key]['mailcatcher']['base'] = "http://{$box['ip']}:1080";
-        $sites[$key]['mailcatcher']['xip.io'] = "http://{$box['ip']}:1080";
-
-        // add phpmyadmin
-        $sites[$key]['phpmyadmin']['base'] = "http://{$box['domain']}/phpmyadmin/";
-        $sites[$key]['phpmyadmin']['xip.io'] = "http://{$box['domain']}/phpmyadmin/";
-        
-    }
-    return $sites;
-}
-
-function getHosts($boxes) {
-    
-    $hosts = [];
-    $hosts[] = "##\n## LMO HOMESTEAD BOXES\n##";
-    foreach ($boxes as $key => $box) {
-        $sites = [];
-        foreach ($box['sites'] as $site) {
-            $sites[] = $site['map'];
-        }
-        $hosts[] = $box['ip'] . ' ' . implode(' ', $sites);
-    }
-    $hosts[] = "######";
-    return implode("\n", $hosts);
-}
-
-
 $boxes = [
     'php7 box' => 'php7',
     'php5.6 box' => 'php5.6'
 ];
 
-$boxes = getBoxes($boxes);
+$h = new homesteadYamlParser($boxes);
 
-$sites = getSites($boxes);
+$hosts = $h->getHosts();
 
-$hosts = getHosts($boxes);
+$sites = $h->getSites(); //getSites($boxes);
+
+// $hosts = getHosts($boxes);
 
 ?>
 <!DOCTYPE html>
@@ -91,14 +43,15 @@ $hosts = getHosts($boxes);
     <div class="container">
         <h1>Local Sites</h1>
 
-        <p>some quick vagrant notes:</p>
+        <p>some quick notes:</p>
         <dl>
-            <dt>h7 provision </dt><dd>This will add new sites and process any intial scripts</dd>
             <dt>h7 up</dt><dd>boot up machine and attach folder mounts</dd>
+            <dt>h7 provision </dt><dd>This will add new sites and process any intial scripts</dd>
+            <dt>h7 reboot</dt><dd>will reset/reboot the machine and provision (reload -- provision)</dd>
+            <dt>h7 edit</dt><dd>open homdstead file in sublime for editing</dd>
         </dl>
         
         <h2>Site Links</h2>
-        
         
             <?php foreach ($boxes as $box => $f): ?>
                 <table class="table table-striped">

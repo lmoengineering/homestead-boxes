@@ -61,3 +61,8 @@ you can get the current sites and hosts file info from either of these URLs if t
 [http://192.168.10.10/](http://192.168.10.10/)  
 
 
+
+## ToDo
+
+- ~~Intergrate into php_hosts_manager for updating hosts file~~
+- Add database dump commands

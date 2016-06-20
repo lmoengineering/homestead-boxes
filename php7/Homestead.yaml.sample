@@ -1,6 +1,7 @@
 ---
 ####   PHP 7 BOX
 ip: "192.168.10.10"
+domain: homestead7.app
 memory: 2048
 cpus: 1
 hostname: php7

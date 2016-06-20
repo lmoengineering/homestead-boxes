@@ -13,6 +13,7 @@ LMO_HOMESTEAD="$(exec 2>/dev/null;builtin cd -- $(dirname "$0"); unset PWD; /usr
 alias h5='__homestead_func php5.6'
 alias h7='__homestead_func php7'
 
+alias lhb='cd $LMO_HOMESTEAD'
 
 function h_update() {
     (builtin cd $LMO_HOMESTEAD && git pull);
@@ -20,14 +21,18 @@ function h_update() {
 
 function __homestead_func() {
 
-    
-
     if [[ $2 == "edit" ]]; then
         subl $LMO_HOMESTEAD/$1/Homestead.yaml;
+    elif [[ $2 == "hosts" ]]; then
+        (builtin cd $LMO_HOMESTEAD && hosts homestead php7 php5.6);
     elif [[ $2 == "reboot" ]]; then
         (builtin cd $LMO_HOMESTEAD/$1 && vagrant reload --provision);
     else
         (builtin cd $LMO_HOMESTEAD/$1 && vagrant ${@:2});
+    fi
+
+    if [[ $2 == 'up' ]]; then
+        open 'http://homestead.app/'
     fi
 }
 
