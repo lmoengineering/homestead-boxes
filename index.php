@@ -41,39 +41,49 @@ $sites = $h->getSites(); //getSites($boxes);
 <body>
     
     <div class="container">
-        <h1>Local Sites</h1>
+        
+        <div class="row">
+            <div class="col-md-5">
 
-        <p>some quick notes:</p>
-        <dl>
-            <dt>h7 up</dt><dd>boot up machine and attach folder mounts</dd>
-            <dt>h7 provision </dt><dd>This will add new sites and process any intial scripts</dd>
-            <dt>h7 reboot</dt><dd>will reset/reboot the machine and provision (reload -- provision)</dd>
-            <dt>h7 edit</dt><dd>open homdstead file in sublime for editing</dd>
-        </dl>
+                <h1>Local Sites</h1>
+
+                <p>some quick notes:</p>
+                <dl>
+                    <dt>h7 up</dt><dd>boot up machine and attach folder mounts</dd>
+                    <dt>h7 provision </dt><dd>This will add new sites and process any intial scripts</dd>
+                    <dt>h7 reboot</dt><dd>will reset/reboot the machine and provision (reload -- provision)</dd>
+                    <dt>h7 edit</dt><dd>open homdstead file in sublime for editing</dd>
+                </dl>
+            </div>
+            <div class="col-md-7">
+                <h2>Host File</h2>
+
+                <p>Please remember update your hosts file if new sites have been added using the printout below.</p>
+
+                <pre><code><?=$hosts?></code></pre>
+            </div>
+        </div>
+
         
         <h2>Site Links</h2>
         
-            <?php foreach ($boxes as $box => $f): ?>
-                <table class="table table-striped">
-                <thead>
-                    <tr><th colspan="3"><?=$box?></th></tr>
-                </thead>
-                <?php foreach ($sites[$box] as $name => $site): ?>
-                    <tr>
-                        <td><?=$name?></td>
-                        <td><a target="_blank" href="<?=$site['base']?>"><?=$site['base']?></a></td>
-                        <td><?if($site['xip.io']):?><a target="_blank" href="<?=$site['xip.io']?>"><?=$site['xip.io']?></a><?endif;?></td>
-                    </tr>
-                <?php endforeach; ?>
-                </table>
+        <?php foreach ($boxes as $box => $f): ?>
+            <table class="table table-striped">
+            <thead>
+                <tr><th colspan="3"><?=$box?></th></tr>
+            </thead>
+            <?php foreach ($sites[$box] as $name => $site): ?>
+                <tr>
+                    <td><?=$name?></td>
+                    <td><a target="_blank" href="<?=$site['base']?>"><?=$site['base']?></a></td>
+                    <td><?if($site['xip.io']):?><a target="_blank" href="<?=$site['xip.io']?>"><?=$site['xip.io']?></a><?endif;?></td>
+                </tr>
             <?php endforeach; ?>
-        
+            </table>
+        <?php endforeach; ?>
+    
 
-        <h2>Host File</h2>
 
-        <p>Please remember update your hosts file if new sites have been added using the printout below.</p>
-
-        <pre><code><?=$hosts?></code></pre>
     </div>
 
 </body>
