@@ -2,33 +2,33 @@
 #
 # install
 # 
-#  source $HOME/lmo-homestead-boxes/homestead-alias
+#  source $HOME/homestead-boxes/homestead-alias
 #
 
-LMO_HOMESTEAD="$(exec 2>/dev/null;builtin cd -- $(dirname "$0"); unset PWD; /usr/bin/pwd || /bin/pwd || pwd)"
+HOMESTEAD_BOXES="$(exec 2>/dev/null;builtin cd -- $(dirname "$0"); unset PWD; /usr/bin/pwd || /bin/pwd || pwd)"
 
 #echo '----'
-#echo $LMO_HOMESTEAD
+#echo $HOMESTEAD_BOXES
 #echo '----'
 alias h5='__homestead_func php5.6'
 alias h7='__homestead_func php7'
 
-alias lhb='cd $LMO_HOMESTEAD'
+alias lhb='cd $HOMESTEAD_BOXES'
 
 function h_update() {
-    (builtin cd $LMO_HOMESTEAD && git pull);
+    (builtin cd $HOMESTEAD_BOXES && git pull);
 }
 
 function __homestead_func() {
 
     if [[ $2 == "edit" ]]; then
-        subl $LMO_HOMESTEAD/$1/Homestead.yaml;
+        subl $HOMESTEAD_BOXES/$1/Homestead.yaml;
     elif [[ $2 == "hosts" ]]; then
-        (builtin cd $LMO_HOMESTEAD && hosts homestead php7 php5.6);
+        (builtin cd $HOMESTEAD_BOXES && hosts homestead php7 php5.6);
     elif [[ $2 == "reboot" ]]; then
-        (builtin cd $LMO_HOMESTEAD/$1 && vagrant reload --provision);
+        (builtin cd $HOMESTEAD_BOXES/$1 && vagrant reload --provision);
     else
-        (builtin cd $LMO_HOMESTEAD/$1 && vagrant ${@:2});
+        (builtin cd $HOMESTEAD_BOXES/$1 && vagrant ${@:2});
     fi
 
     if [[ $2 == 'up' ]]; then
@@ -38,7 +38,7 @@ function __homestead_func() {
 
 function __update_homestead() {
 
-    builtin cd $LMO_HOMESTEAD
+    builtin cd $HOMESTEAD_BOXES
 
     if git pull --rebase --stat origin master
     then
@@ -49,7 +49,7 @@ function __update_homestead() {
     #   printf '%s\n' ' / / / /  / /_/ /  '
     #   printf '%s\n' '/_/ /_/  /_ _ _/   '
     #   printf '%s\n' '                   '
-      printf "${BLUE}%s\n" "Hooray! lmo-homestead-boxes have been updated and/or is at the current version."
+      printf "${BLUE}%s\n" "Hooray! homestead-boxes have been updated and/or is at the current version."
     #   printf "${BLUE}${BOLD}%s${NORMAL}\n" "To keep up on the latest news and updates, follow us on twitter: https://twitter.com/ohmyzsh"
     #   printf "${BLUE}${BOLD}%s${NORMAL}\n" "Get your Oh My Zsh swag at:  http://shop.planetargon.com/"
     else
@@ -59,5 +59,5 @@ function __update_homestead() {
 }
 
 function __homestead_vagrant() {
-    (builtin cd $LMO_HOMESTEAD/$1 && vagrant ${@:2});
+    (builtin cd $HOMESTEAD_BOXES/$1 && vagrant ${@:2});
 }

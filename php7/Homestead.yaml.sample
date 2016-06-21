@@ -4,8 +4,8 @@ ip: "192.168.10.10"
 domain: homestead7.app
 memory: 2048
 cpus: 1
-hostname: php7
-name: lmo-homestead-boxes-php7
+hostname: homestead-boxes-php7
+name: homestead-boxes-php7
 provider: virtualbox
 version: ">= 0.4.2"
 
@@ -15,18 +15,24 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
+      # Site2
+    - map: "~/Sites/site"
+      to: "/home/vagrant/site"
       # Default
-    - map: "~/lmo-homestead-boxes"
-      to: "/home/vagrant/lmo-homestead-boxes"
+    - map: "~/homestead-boxes"
+      to: "/home/vagrant/homestead-boxes"
 
 sites:
+      # Site2
+    - map: site2.app
+      to: "/home/vagrant/site/public"
       # Default
     - map: homestead7.app
-      to: "/home/vagrant/lmo-homestead-boxes"
+      to: "/home/vagrant/homestead-boxes"
 
 databases:
     - homestead
-
+    - site2
 
 networks:
     - type: public_network

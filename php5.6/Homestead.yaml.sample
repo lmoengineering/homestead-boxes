@@ -1,9 +1,11 @@
 ---
+####   PHP 5.6 BOX
 ip: "192.168.10.11"
+domain: homestead.app
 memory: 2048
 cpus: 1
-hostname: lmo-homestead-boxes-php5.6
-name: lmo-homestead-boxes-php5.6
+hostname: homestead-boxes-php5.6
+name: homestead-boxes-php5.6
 provider: virtualbox
 version: 0.3.3
 
@@ -13,37 +15,24 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-      # LMO 
-    - map: "~/Sites/lmo.com"
-      to: "/home/vagrant/lmo-com"
-      database: lmo-com
-      # CDC
-    - map: "~/Sites/cdc"
-      to: "/home/vagrant/cdc"
-      database: cdc
+      # Site1
+    - map: "~/Sites/site"
+      to: "/home/vagrant/site"
       # Default
-    - map: "~/lmo-homestead-boxes"
-      to: "/home/vagrant/lmo-homestead-boxes"
+    - map: "~/homestead-boxes"
+      to: "/home/vagrant/homestead-boxes"
 
 sites:
-      # LMO
-    - map: lmo.app
-      to: "/home/vagrant/lmo-com/wwwroot"
-    - map: lmo.local
-      to: "/home/vagrant/lmo-com/wwwroot"
-      # CDC
-    - map: cdc.app
-      to: "/home/vagrant/cdc"
-    - map: www.cdc.app
-      to: "/home/vagrant/cdc"
+      # Site1
+    - map: site1.app
+      to: "/home/vagrant/site/public"
       # Default
     - map: homestead.app
-      to: "/home/vagrant/lmo-homestead-boxes"
+      to: "/home/vagrant/homestead-boxes"
 
 databases:
     - homestead
-    - lmo-com
-    - cdc
+    - site1
 
 networks:
     - type: public_network
