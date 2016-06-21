@@ -15,7 +15,7 @@ __Requirements__
 ### 1. Clone Repo
 clone repo using git into local folder (example ~/homestead-boxes)
 
-    git clone git@github.com:lmoengineering/homestead-boxes.git ~/homestead-boxes
+    git clone git@github.com:jjpmann/homestead-boxes.git ~/homestead-boxes
 
 ### 2. Install Dependencies
 
