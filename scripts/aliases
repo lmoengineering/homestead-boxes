@@ -9,7 +9,7 @@ alias phpspec='vendor/bin/phpspec'
 alias phpunit='vendor/bin/phpunit'
 alias serve=serve-laravel
 
-alias install-drupal='function __func() { (builtin cd $LMO_HOMESTEAD/scripts && install-drupal-7.sh $*); unset -f __func; }; __func'
+alias install-drupal='function __func() { (builtin cd $HOMESTEAD_BOXES/scripts && install-drupal-7.sh $*); unset -f __func; }; __func'
 
 function serve-laravel() {
     if [[ "$1" && "$2" ]]

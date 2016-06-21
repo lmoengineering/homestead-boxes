@@ -39,8 +39,8 @@ exec /usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0' > /etc/in
     ## Install phpMyAdmin
     composer -g config repositories.phpmyadmin composer https://www.phpmyadmin.net/packages.json
     composer create-project phpmyadmin/phpmyadmin --no-dev
-    cp /home/vagrant/lmo-homestead-boxes/config.ini.php /home/vagrant/phpmyadmin/config.ini.php
-    ln -s /home/vagrant/phpmyadmin/ /home/vagrant/lmo-homestead-boxes/phpmyadmin
+    cp /home/vagrant/homestead-boxes/config.ini.php /home/vagrant/phpmyadmin/config.ini.php
+    ln -s /home/vagrant/phpmyadmin/ /home/vagrant/homestead-boxes/phpmyadmin
 
     touch /.installed
 
@@ -48,7 +48,7 @@ fi
 
 ## Save LAN IP
 LAN_IP=$(/sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ":" $3 }' |awk -F: '{ if ( $1 == "eth2" ) { print $2 } }');
-echo $LAN_IP > /home/vagrant/lmo-homestead-boxes/.php7-ip
+echo $LAN_IP > /home/vagrant/homestead-boxes/.php7-ip
 
 
 ## show versions & IPs
