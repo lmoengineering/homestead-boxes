@@ -1,6 +1,6 @@
 {
     "require": {
         "symfony/yaml": "^2.7",
-        "jjpmann/php-hosts-manager": "^0.0.6"
+        "jjpmann/php-hosts-manager": "^0.0.7"
     }
 }

@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2f8eacf5b190fcc93abb91e0bf476528",
-    "content-hash": "1adb749683f12df43bbf5e992f7c6169",
+    "hash": "5c50cb81eb27757b3853d20aeb485425",
+    "content-hash": "a77c5bb8bfb9a868f8ab19362c45ab17",
     "packages": [
         {
             "name": "jjpmann/php-hosts-manager",
-            "version": "v0.0.6",
+            "version": "v0.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jjpmann/php-hosts-manager.git",
-                "reference": "25a9cee105d564042a9af529be8c9d8685f3aabf"
+                "reference": "44cc3defd84e87b509c729687d4350fb97f775b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jjpmann/php-hosts-manager/zipball/25a9cee105d564042a9af529be8c9d8685f3aabf",
-                "reference": "25a9cee105d564042a9af529be8c9d8685f3aabf",
+                "url": "https://api.github.com/repos/jjpmann/php-hosts-manager/zipball/44cc3defd84e87b509c729687d4350fb97f775b9",
+                "reference": "44cc3defd84e87b509c729687d4350fb97f775b9",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "hosts",
                 "php"
             ],
-            "time": "2016-06-20 21:23:03"
+            "time": "2016-06-20 21:42:33"
         },
         {
             "name": "symfony/console",
