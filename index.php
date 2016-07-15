@@ -24,7 +24,7 @@ $boxes = [
 
 $h = new homesteadYamlParser($boxes);
 
-$hosts = $h->getHosts();
+$hosts = $h->getHosts('LMO HOMESTEAD BOXES');
 
 $sites = $h->getSites(); //getSites($boxes);
 
