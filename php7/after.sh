@@ -26,15 +26,33 @@ else
     # install Ruby and mailcatcher
     gem install mailcatcher
 
-    echo 'description "Mailcatcher"
 
-start on runlevel [2345]
-stop on runlevel [!2345]
+#     echo 'description "Mailcatcher"
 
-respawn
+# start on runlevel [2345]
+# stop on runlevel [!2345]
 
-exec /usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0' > /etc/init/mailcatcher.conf
-    service mailcatcher start
+# respawn
+
+# exec /usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0' > /etc/init/mailcatcher.conf
+#     service mailcatcher start
+
+
+     echo '[Unit]
+Description=MailCatcher Service
+After=network.service vagrant.mount
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/mailcatcher --foreground --ip 0.0.0.0
+
+[Install]
+WantedBy=multi-user.target' > /lib/systemd/system/mailcatcher.service
+
+    systemctl enable mailcatcher
+    systemctl start mailcatcher
+
+
 
     ## Install phpMyAdmin
     composer -g config repositories.phpmyadmin composer https://www.phpmyadmin.net/packages.json
