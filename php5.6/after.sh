@@ -59,7 +59,7 @@ exec /usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0' > /etc/in
 fi
 
 ## Save LAN IP
-LAN_IP=$(/sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ":" $3 }' |awk -F: '{ if ( $1 == "eth2" ) { print $2 } }');
+LAN_IP=$(/sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ":" $3 }' |awk -F: '{ if ( $1 == "eth2" || $1 == "enp0s9"  ) { print $2 } }');
 echo $LAN_IP > /home/vagrant/homestead-boxes/.php5.6-ip
 
 

@@ -7,6 +7,7 @@ class Custom
         scriptDir = File.dirname(__FILE__)
 
         # Check each project for after.sh script
+        config.vm.provision "shell", inline: "echo 'Check each project for after.sh script'"
         if settings.include? 'folders'
             settings["folders"].each do |folder|
                 afterScriptPath = File.expand_path(folder["map"] + '/after.sh')
@@ -18,6 +19,8 @@ class Custom
         end
 
         # Check each project for database dump
+        
+        config.vm.provision "shell", inline: "echo 'Import database dump files'"
         if settings.include? 'folders'
             settings["folders"].each do |folder|
                 if folder.include? 'database'
@@ -45,12 +48,15 @@ class Custom
         end
 
         # Setup XIP.IO
+        config.vm.provision "shell", inline: "echo 'Setup XIP.IO'"
         settings["sites"].each do |site|
             config.vm.provision "shell" do |s|
                 s.path = "../scripts/setup-xip.io.sh"
                 s.args = [site["map"]]
             end
         end
+        config.vm.provision "shell", inline: "service nginx restart"
+        
 
   end
 end
