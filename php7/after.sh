@@ -52,7 +52,9 @@ WantedBy=multi-user.target' > /lib/systemd/system/mailcatcher.service
     systemctl enable mailcatcher
     systemctl start mailcatcher
 
-
+    # Fix EE group by
+    printf '%s\n%s\n%s\n' '[mysqld]' '# Fix EE issues with group by' 'sql_mode = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' > /etc/mysql/conf.d/sql_mode.cnf
+    service mysql restart 
 
     ## Install phpMyAdmin
     composer -g config repositories.phpmyadmin composer https://www.phpmyadmin.net/packages.json
