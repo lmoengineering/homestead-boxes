@@ -66,3 +66,4 @@ you can get the current sites and hosts file info from either of these URLs if t
 
 - ~~Intergrate into php_hosts_manager for updating hosts file~~
 - Add database dump commands
+- add custom nginx include per site

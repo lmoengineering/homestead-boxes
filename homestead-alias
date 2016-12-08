@@ -13,6 +13,12 @@ HOMESTEAD_BOXES="$(exec 2>/dev/null;builtin cd -- $(dirname "$0"); unset PWD; /u
 alias h5='__homestead_func php5.6'
 alias h7='__homestead_func php7'
 
+alias h5_mysql="mysql -h 192.168.10.11 -u homestead -psecret"
+alias h5_mysqldump="mysqldump -h 192.168.10.11 -u homestead -psecret"
+
+alias h7_mysql="mysql -h 192.168.10.10 -u homestead -psecret"
+alias h7_mysqldump="mysqldump -h 192.168.10.10 -u homestead -psecret"
+
 alias lhb='cd $HOMESTEAD_BOXES'
 
 function h_update() {

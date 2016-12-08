@@ -53,12 +53,16 @@ $sites = $h->getSites(); //getSites($boxes);
                     <dt>h7 provision </dt><dd>This will add new sites and process any intial scripts</dd>
                     <dt>h7 reboot</dt><dd>will reset/reboot the machine and provision (reload -- provision)</dd>
                     <dt>h7 edit</dt><dd>open homdstead file in sublime for editing</dd>
+                    <dt>h7 hosts</dt><dd>automaticall update host file (requires password)</dd>
+                    <dt>h7_mysql</dt><dd>shortcut for mysql command with user/pass</dd>
+                    <dt>h7_mysqldump</dt><dd>shortcut for mysqldump command with user/pass</dd>
                 </dl>
+                <p>*May be <b>h5 xxx</b> depending on the box</p>
             </div>
             <div class="col-md-7">
                 <h2>Host File</h2>
 
-                <p>Please remember update your hosts file if new sites have been added using the printout below.</p>
+                <p>Please remember update your hosts file <b>h7 hosts</b> if new sites have been added using the printout below.</p>
 
                 <pre><code><?=$hosts?></code></pre>
             </div>
