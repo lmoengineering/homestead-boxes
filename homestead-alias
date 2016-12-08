@@ -40,6 +40,17 @@ function __homestead_func() {
     if [[ $2 == 'up' ]]; then
         open 'http://homestead.app/'
     fi
+
+    __homestead_update_check;
+
+}
+
+function __homestead_update_check() {
+    if (builtin cd $HOMESTEAD_BOXES && git fetch && git status) | grep 'Your branch is behind'; then
+        echo '\n\n\n------------------------------------------------------------------------\n';
+        echo '\tYour homestead boxes should be updated, "h_update".';
+        echo '\n------------------------------------------------------------------------\n\n';
+    fi
 }
 
 function __update_homestead() {
