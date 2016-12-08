@@ -1,6 +1,6 @@
 # homestead-boxes
 
-Run multiple homestead boxes globally for all files
+Run multiple homestead boxes globally for mutliple sites on each box
 
 
 ## Install
