@@ -38,7 +38,12 @@ function __homestead_func() {
     fi
 
     if [[ $2 == 'up' ]]; then
-        open 'http://homestead.app/'
+        if [[ $1 == 'php7' ]]; then
+            open 'http://homestead7.app/'
+        else
+            open 'http://homestead.app/'
+        fi
+        
     fi
 
     __homestead_update_check;
