@@ -22,7 +22,7 @@ alias h7_mysqldump="mysqldump -h 192.168.10.10 -u homestead -psecret"
 alias hb='cd $HOMESTEAD_BOXES'
 
 function h_update() {
-    (builtin cd $HOMESTEAD_BOXES && git pull);
+    (builtin cd $HOMESTEAD_BOXES && git stash && git pull && git stash pop);
 }
 
 function __homestead_func() {
