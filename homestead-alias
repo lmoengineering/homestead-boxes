@@ -33,6 +33,7 @@ function __homestead_func() {
         (builtin cd $HOMESTEAD_BOXES && hosts homestead php7 php5.6);
     elif [[ $2 == "reboot" ]]; then
         (builtin cd $HOMESTEAD_BOXES/$1 && vagrant reload --provision);
+        (builtin cd $HOMESTEAD_BOXES && hosts homestead php7 php5.6);
     else
         (builtin cd $HOMESTEAD_BOXES/$1 && vagrant ${@:2});
     fi
@@ -43,7 +44,8 @@ function __homestead_func() {
         else
             open 'http://homestead.app/'
         fi
-        
+
+        (builtin cd $HOMESTEAD_BOXES && hosts homestead php7 php5.6);
     fi
 
     __homestead_update_check;
