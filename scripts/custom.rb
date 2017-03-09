@@ -18,11 +18,14 @@ class Custom
             end
         end
 
-        # Check each project for database dump
         
-        config.vm.provision "shell", inline: "echo 'Import database dump files'"
+        # Loop through site folders for extra setup
+        config.vm.provision "shell", inline: "echo 'Loop through site folders for extra setup'"
         if settings.include? 'folders'
             settings["folders"].each do |folder|
+                
+                # Check each project for database dump
+                config.vm.provision "shell", inline: "echo 'Import database dump files'"
                 if folder.include? 'database'
 
                     dump = File.expand_path(folder["map"] + '/.database/db-latest.sql.zip')
@@ -43,7 +46,19 @@ class Custom
                         end
                     end
 
+
+
                 end
+
+                # Check each project for shell script
+                config.vm.provision "shell", inline: "echo 'Check each project for shell script'"
+                projectScript = '/.homestead.sh';
+                projectScriptPath = File.expand_path(folder["map"] + projectScript)
+
+                if File.exists? projectScriptPath then
+                    config.vm.provision "shell", path: projectScriptPath
+                end
+
             end
         end
 
