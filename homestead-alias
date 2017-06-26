@@ -12,12 +12,16 @@ HOMESTEAD_BOXES="$(exec 2>/dev/null;builtin cd -- $(dirname "$0"); unset PWD; /u
 #echo '----'
 alias h5='__homestead_func php5.6'
 alias h7='__homestead_func php7'
+alias h71='__homestead_func php7.1'
 
 alias h5_mysql="mysql -h 192.168.10.11 -u homestead -psecret"
 alias h5_mysqldump="mysqldump -h 192.168.10.11 -u homestead -psecret"
 
 alias h7_mysql="mysql -h 192.168.10.10 -u homestead -psecret"
 alias h7_mysqldump="mysqldump -h 192.168.10.10 -u homestead -psecret"
+
+alias h71_mysql="mysql -h 192.168.10.12 -u homestead -psecret"
+alias h71_mysqldump="mysqldump -h 192.168.10.12 -u homestead -psecret"
 
 alias hb='cd $HOMESTEAD_BOXES'
 
@@ -30,10 +34,10 @@ function __homestead_func() {
     if [[ $2 == "edit" ]]; then
         subl $HOMESTEAD_BOXES/$1/Homestead.yaml;
     elif [[ $2 == "hosts" ]]; then
-        (builtin cd $HOMESTEAD_BOXES && hosts homestead php7 php5.6);
+        __hosts
     elif [[ $2 == "reboot" ]]; then
         (builtin cd $HOMESTEAD_BOXES/$1 && vagrant reload --provision);
-        (builtin cd $HOMESTEAD_BOXES && hosts homestead php7 php5.6);
+        __hosts
     else
         (builtin cd $HOMESTEAD_BOXES/$1 && vagrant ${@:2});
     fi
@@ -45,7 +49,7 @@ function __homestead_func() {
             open 'http://homestead.app/'
         fi
 
-        (builtin cd $HOMESTEAD_BOXES && hosts homestead php7 php5.6);
+        __hosts
     fi
 
     __homestead_update_check;
@@ -84,4 +88,8 @@ function __update_homestead() {
 
 function __homestead_vagrant() {
     (builtin cd $HOMESTEAD_BOXES/$1 && vagrant ${@:2});
+}
+
+function __hosts() {
+    (builtin cd $HOMESTEAD_BOXES && hosts homestead php7.1 php7 php5.6);
 }

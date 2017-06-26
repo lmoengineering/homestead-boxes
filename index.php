@@ -19,7 +19,8 @@ function lanIP($v){
 
 $boxes = [
     'php7 box' => 'php7',
-    'php5.6 box' => 'php5.6'
+    'php5.6 box' => 'php5.6',
+    'php7.1 box' => 'php7.1'
 ];
 
 $h = new homesteadYamlParser($boxes);
