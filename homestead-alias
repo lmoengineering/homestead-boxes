@@ -44,9 +44,9 @@ function __homestead_func() {
 
     if [[ $2 == 'up' ]]; then
         if [[ $1 == 'php7' ]]; then
-            open 'http://homestead7.app/'
+            open 'http://homestead7.local/'
         else
-            open 'http://homestead.app/'
+            open 'http://homestead.local/'
         fi
 
         __hosts
